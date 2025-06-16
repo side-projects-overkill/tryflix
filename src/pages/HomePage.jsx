@@ -1,6 +1,7 @@
 import MovieCard from "../components/MovieCard";
 import { useEffect, useState } from 'react';
 import './HomePage.css'
+import Header from '../components/Header'
 
 function HomePage() {
 
@@ -23,6 +24,7 @@ function HomePage() {
 
   return (
     <>
+     <Header/>
       <div className="homepage">
         <MovieCard movies={movies} type={"Popular"}/>
         <MovieCard movies={movies} type={"Top rated"}/>

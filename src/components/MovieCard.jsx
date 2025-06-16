@@ -1,7 +1,11 @@
+import React, { useContext } from 'react';
 import "./MovieCard.css";
 import { useNavigate } from "react-router-dom";
+import { CartContext } from '../context/CartContext';
+
 function MovieCard({ movies, type }) {
   const navigate = useNavigate();
+  const { addToCart } = useContext(CartContext);
 
   const viewMovie = (movie) => {
     navigate(`/${movie.imdbID}`);
@@ -23,7 +27,7 @@ function MovieCard({ movies, type }) {
             >
               View
             </button>
-            <button className="movie-button">Add to Cart</button>
+            <button className="movie-button" onClick={()=> addToCart(movie)}>Add to Cart</button>
             <button className="movie-button buy-now" onClick={()=> buyMovie()}>Buy Now</button>
           </div>
         ))}
