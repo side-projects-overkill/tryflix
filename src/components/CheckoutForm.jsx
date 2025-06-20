@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
+import { useLocation, useNavigate } from "react-router-dom";
+import { CartContext } from "../context/CartContext";
 import FormField from "./FormField";
 import "./CheckoutForm.scss";
 
@@ -10,6 +12,15 @@ const cardImages = [
 ];
 
 const CheckoutForm = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { clearCart } = useContext(CartContext);
+  
+  // Get cart data from location state or use defaults
+  const cartData = location.state || {};
+  const { cartItems = [], quantities = {}, pricing = {} } = cartData;
+  const { subtotal = 0, tax = 0, deliveryFee = 0, discount = 0, total = 0 } = pricing;
+
   const initialValues = {
     name: "",
     email: "",
@@ -40,8 +51,11 @@ const CheckoutForm = () => {
 
   const handleSubmit = (values, { resetForm }) => {
     console.log("Form Submitted:", values);
-    alert("Payment Successful!");
+    console.log("Order Details:", { cartItems, quantities, pricing });
+    alert("Payment Successful! Your order has been placed.");
+    clearCart();
     resetForm();
+    navigate('/');
   };
 
   const fields = [
@@ -83,11 +97,57 @@ const CheckoutForm = () => {
         <div className="checkout-summary-section">
           <div className="checkout-summary">
             <span style={{fontSize: '2.2rem', display: 'block', marginBottom: 18}}>🎬</span>
-            <h2 className="checkout-title">Checkout</h2>
-            <p style={{color: '#bbb', fontSize: '1.08rem', margin: 0}}>
-              Complete your purchase to enjoy unlimited streaming of your selected movies on <span style={{color: '#1ed760', fontWeight: 600}}>Tryflix</span>.<br/>
-              Enter your details below to proceed with secure payment.
-            </p>
+            <h2 className="checkout-title">Order Summary</h2>
+            
+            {cartItems.length > 0 ? (
+              <div className="order-details">
+                <div className="order-items">
+                  {cartItems.slice(0, 3).map((item) => {
+                    const qty = quantities[item.imdbID || item.id] || 1;
+                    return (
+                      <div key={item.imdbID || item.id} className="order-item">
+                        <span className="item-name">{item.Title}</span>
+                        <span className="item-qty">x{qty}</span>
+                      </div>
+                    );
+                  })}
+                  {cartItems.length > 3 && (
+                    <div className="more-items">+{cartItems.length - 3} more items</div>
+                  )}
+                </div>
+                
+                <div className="order-pricing">
+                  <div className="price-row">
+                    <span>Subtotal</span>
+                    <span>₹{subtotal}</span>
+                  </div>
+                  {discount > 0 && (
+                    <div className="price-row discount">
+                      <span>Discount</span>
+                      <span>-₹{discount}</span>
+                    </div>
+                  )}
+                  <div className="price-row">
+                    <span>Tax</span>
+                    <span>₹{tax}</span>
+                  </div>
+                  <div className="price-row">
+                    <span>Delivery</span>
+                    <span>{deliveryFee === 0 ? 'FREE' : `₹${deliveryFee}`}</span>
+                  </div>
+                  <div className="price-divider"></div>
+                  <div className="price-row total">
+                    <span>Total</span>
+                    <span>₹{total}</span>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <p style={{color: '#bbb', fontSize: '1.08rem', margin: 0}}>
+                Complete your purchase to enjoy unlimited streaming on <span style={{color: '#1ed760', fontWeight: 600}}>Tryflix</span>.
+              </p>
+            )}
+            
             <div className="checkout-card-logos">
               {cardImages.map((src, idx) => (
                 <img key={idx} src={src} alt="Card Logo" />

@@ -1,10 +1,16 @@
 import React, { useContext } from 'react';
 import { MdShoppingCart } from 'react-icons/md';
 import { CartContext } from '../context/CartContext';
+import { useNavigate } from 'react-router-dom';
 import './Header.scss';  // import SCSS
 
 function Header() {
   const { cart } = useContext(CartContext);
+  const navigate = useNavigate();
+
+  const handleCartClick = () => {
+    navigate('/cart');
+  };
 
   return (
     <header className="header">
@@ -17,7 +23,7 @@ function Header() {
           <a href="#premium">Premium</a>
         </nav>
       </div>
-      <div className="cart-container">
+      <div className="cart-container" onClick={handleCartClick}>
         <MdShoppingCart className="cart-icon" />
         {cart.length > 0 && (
           <span className="cart-count">{cart.length}</span>

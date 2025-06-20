@@ -16,6 +16,20 @@
   .movie-grid {
     grid-template-columns: 1fr;
   }
+  
+  .price-badge {
+    font-size: 0.85rem;
+    padding: 3px 6px;
+    top: 190px;
+    right: 10px;
+  }
+  
+  .rating-badge {
+    font-size: 0.85rem;
+    padding: 3px 8px;
+    top: 10px;
+    left: 10px;
+  }
 }
 
 .movie-card {
@@ -95,6 +109,21 @@
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(30,215,96,0.12);
   z-index: 4;
+}
+
+.price-badge {
+  position: absolute;
+  top: 180px;
+  right: 12px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+  z-index: 4;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .movie-buttons {

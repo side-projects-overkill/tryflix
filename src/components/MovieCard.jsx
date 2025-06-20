@@ -8,11 +8,31 @@ function MovieCard({ movies, type }) {
   const navigate = useNavigate();
   const { addToCart, isInCart } = useContext(CartContext);
 
+  // Use movie ID as price
+  const getMoviePrice = (movie) => {
+    const movieId = movie.imdbID || movie.id || '149';
+    // Extract numeric part from ID and use as price
+    const numericPrice = movieId.replace(/\D/g, '').slice(-3) || '149';
+    return parseInt(numericPrice) || 149;
+  };
+
   const viewMovie = (movie) => {
     navigate(`/${movie.imdbID}`);
   };
-  const buyMovie = () => {
-    navigate(`/checkout`);
+  const buyMovie = (movie) => {
+    const moviePrice = getMoviePrice(movie);
+    const orderData = {
+      cartItems: [movie],
+      quantities: { [movie.imdbID || movie.id]: 1 },
+      pricing: {
+        subtotal: moviePrice,
+        tax: Math.round(moviePrice * 0.18),
+        deliveryFee: moviePrice > 500 ? 0 : 49,
+        discount: moviePrice > 1000 ? Math.round(moviePrice * 0.1) : 0,
+        total: moviePrice + Math.round(moviePrice * 0.18) + (moviePrice > 500 ? 0 : 49) - (moviePrice > 1000 ? Math.round(moviePrice * 0.1) : 0)
+      }
+    };
+    navigate('/checkout', { state: orderData });
   };
   return (
     <>
@@ -25,6 +45,7 @@ function MovieCard({ movies, type }) {
             {movie.imdbRating && (
               <span className="rating-badge">⭐ {movie.imdbRating}</span>
             )}
+            <div className="price-badge">₹{getMoviePrice(movie)}</div>
             <h3>{movie.title}</h3>
             <div className="movie-buttons">
               <button
@@ -41,7 +62,7 @@ function MovieCard({ movies, type }) {
                 >
                   <FaCartPlus size={25} /> Add to Cart
                 </button>
-                <button className="movie-button buy-now" onClick={()=> buyMovie()}>
+                <button className="movie-button buy-now" onClick={()=> buyMovie(movie)}>
                   <FaBolt /> Buy Now
                 </button>
               </div>
