@@ -44,6 +44,72 @@ $background: #181818;
 .checkout-summary {
   text-align: center;
   margin-bottom: 0;
+  
+  .order-details {
+    margin: 20px 0;
+    text-align: left;
+    
+    .order-items {
+      margin-bottom: 20px;
+      
+      .order-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        
+        .item-name {
+          font-size: 0.9rem;
+          color: #fff;
+          flex: 1;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          margin-right: 10px;
+        }
+        
+        .item-qty {
+          font-size: 0.9rem;
+          color: #888;
+          font-weight: 600;
+        }
+      }
+      
+      .more-items {
+        padding: 8px 0;
+        font-size: 0.85rem;
+        color: #667eea;
+        font-style: italic;
+      }
+    }
+    
+    .order-pricing {
+      .price-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+        
+        &.discount {
+          color: #2ed573;
+        }
+        
+        &.total {
+          font-size: 1.1rem;
+          font-weight: 700;
+          color: #fff;
+          margin-top: 10px;
+        }
+      }
+      
+      .price-divider {
+        height: 1px;
+        background: rgba(255, 255, 255, 0.1);
+        margin: 15px 0 10px;
+      }
+    }
+  }
 }
 
 .checkout-card-logos {
@@ -219,6 +285,7 @@ $background: #181818;
     max-width: 100%;
     box-sizing: border-box;
     font-size: 1rem;
+    padding: 14px 16px;
   }
   .checkout-outer {
     min-height: unset;
@@ -263,7 +330,7 @@ $background: #181818;
     max-width: 100%;
     box-sizing: border-box;
     font-size: 1.05rem;
-    padding: 14px 12px;
+    padding: 16px 14px;
   }
   .checkout-form .submit-button {
     margin-bottom: 18px;

@@ -1,0 +1,455 @@
+.cart-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #181818 0%, #232526 100%);
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+}
+
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  margin-top: 30px;
+  
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1ed760;
+  }
+  
+  .item-count {
+    font-size: 1.1rem;
+    color: #888;
+  }
+}
+
+.cart-content {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 40px;
+}
+
+.cart-items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cart-item {
+  display: flex;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+  }
+  
+  .item-image {
+    flex-shrink: 0;
+    width: 120px;
+    height: 180px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-right: 20px;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  
+  .item-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    
+    h3 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+    
+    .item-year {
+      color: #888;
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+    
+    .item-type {
+      color: #1ed760;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 20px;
+      text-transform: capitalize;
+    }
+    
+    .item-actions {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      
+
+      
+      .remove-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: none;
+        border: none;
+        color: #ff4757;
+        cursor: pointer;
+        font-size: 0.9rem;
+        padding: 8px 0px;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        
+        &:hover {
+          background: rgba(255, 71, 87, 0.1);
+          transform: scale(1.05);
+        }
+      }
+    }
+  }
+  
+  .item-pricing {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    
+    .unit-price {
+      font-size: 0.9rem;
+      color: #888;
+      text-decoration: line-through;
+    }
+    
+    .total-price {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #1ed760;
+    }
+  }
+}
+
+.cart-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.summary-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  
+  h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #fff;
+  }
+  
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+    
+    &.discount {
+      color: #2ed573;
+    }
+    
+    &.total {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #fff;
+      margin-top: 10px;
+    }
+  }
+  
+  .summary-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 15px 0;
+  }
+  
+  .checkout-btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(90deg, #1ed760 60%, #00b8d9 100%);
+    border: none;
+    border-radius: 10px;
+    color: #181818;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(30, 215, 96, 0.3);
+      background: linear-gradient(90deg, #00b8d9 60%, #1ed760 100%);
+      color: #fff;
+    }
+  }
+  
+  .continue-shopping {
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: #888;
+    font-size: 0.95rem;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      border-color: #1ed760;
+      color: #1ed760;
+    }
+  }
+}
+
+.benefits-card {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  
+  h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #fff;
+  }
+  
+  .benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    color: #ccc;
+    
+    .benefit-icon {
+      color: #1ed760;
+      font-size: 1rem;
+    }
+  }
+}
+
+.promo-card {
+  background: linear-gradient(135deg, rgba(30, 215, 96, 0.1) 0%, rgba(0, 184, 217, 0.1) 100%);
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid rgba(30, 215, 96, 0.2);
+  
+  h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #1ed760;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
+    li {
+      font-size: 0.9rem;
+      color: #ccc;
+      margin-bottom: 8px;
+      position: relative;
+      padding-left: 20px;
+      
+      &:before {
+        content: '✓';
+        position: absolute;
+        left: 0;
+        color: #2ed573;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.empty-cart {
+  text-align: center;
+  padding: 80px 20px;
+  
+  .empty-cart-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    opacity: 0.5;
+  }
+  
+  h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #fff;
+  }
+  
+  p {
+    font-size: 1.1rem;
+    color: #888;
+    margin-bottom: 30px;
+  }
+  
+  .continue-shopping-btn {
+    padding: 15px 30px;
+    background: linear-gradient(90deg, #1ed760 60%, #00b8d9 100%);
+    border: none;
+    border-radius: 10px;
+    color: #181818;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(30, 215, 96, 0.3);
+      background: linear-gradient(90deg, #00b8d9 60%, #1ed760 100%);
+      color: #fff;
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 1024px) {
+  .cart-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .cart-summary {
+    order: 1;
+  }
+}
+
+@media (max-width: 768px) {  
+  .cart-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    
+    h1 {
+      font-size: 1.8rem;
+    }
+  }
+  
+  .cart-item {
+    flex-direction: row;
+    text-align: left;
+    padding: 15px;
+    
+    .item-image {
+      width: 80px;
+      height: 120px;
+      margin-right: 15px;
+      flex-shrink: 0;
+    }
+    
+    .item-details {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      
+      h3 {
+        font-size: 1.1rem;
+        margin-bottom: 4px;
+      }
+      
+      .item-year, .item-type {
+        font-size: 0.8rem;
+        margin-bottom: 2px;
+      }
+      
+      .item-actions {
+        margin-top: auto;
+        justify-content: flex-start;
+        
+        .remove-btn {
+          font-size: 0.85rem;
+          padding: 6px 10px;
+        }
+      }
+    }
+    
+    .item-pricing {
+      flex-shrink: 0;
+      align-items: flex-end;
+      justify-content: center;
+      margin-left: 10px;
+      
+      .total-price {
+        font-size: 1.2rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .cart-header h1 {
+    font-size: 1.6rem;
+  }
+  
+  .cart-item {
+    padding: 12px;
+    
+    .item-image {
+      width: 70px;
+      height: 105px;
+      margin-right: 12px;
+    }
+    
+    .item-details {
+      h3 {
+        font-size: 1rem;
+      }
+      
+      .item-year, .item-type {
+        font-size: 0.75rem;
+      }
+      
+      .item-actions {
+        .remove-btn {
+          font-size: 0.8rem;
+          padding: 5px 8px;
+        }
+      }
+    }
+    
+    .item-pricing {
+      margin-left: 8px;
+      
+      .total-price {
+        font-size: 1.1rem;
+      }
+    }
+  }
+  
+  .summary-card,
+  .benefits-card,
+  .promo-card {
+    padding: 15px 12px;
+  }
+} 

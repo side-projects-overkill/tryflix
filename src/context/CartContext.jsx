@@ -28,8 +28,16 @@ export const CartProvider = ({ children }) => {
     return cart.some((item) => getMovieId(item) === movieId);
   };
 
+  const clearCart = () => {
+    setCart([]);
+  };
+
+  const getTotalItems = () => {
+    return cart.length;
+  };
+
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, isInCart }}>
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, isInCart, clearCart, getTotalItems }}>
       {children}
     </CartContext.Provider>
   );
