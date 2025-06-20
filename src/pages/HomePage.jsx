@@ -15,7 +15,7 @@ function HomePage() {
 
   const fetchMovies = async () => {
     try {
-      const response = await fetch('https://www.apirequest.in/movie/api'); // Example public API
+      const response = await fetch(import.meta.env.VITE_MOVIE_API); // Example public API
       const data = await response.json();
       setMovies(data.slice(0, 20));
     } catch (error) {
