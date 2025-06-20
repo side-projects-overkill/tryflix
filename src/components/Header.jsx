@@ -8,7 +8,15 @@ function Header() {
 
   return (
     <header className="header">
-      <h1 className="logo">Movie Store</h1>
+      <div className="header-left">
+        <h1 className="logo">Tryflix</h1>
+        <nav className="nav-links">
+          <a href="/">Home</a>
+          <a href="#movies">Movies</a>
+          <a href="#sports">Sports</a>
+          <a href="#premium">Premium</a>
+        </nav>
+      </div>
       <div className="cart-container">
         <MdShoppingCart className="cart-icon" />
         {cart.length > 0 && (
