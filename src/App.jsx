@@ -10,7 +10,7 @@ function App() {
   return (
     <>
     <CartProvider>
-     <Router>
+     <Router basename="/tryflix">
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/checkout" element={<CheckoutForm />} />
