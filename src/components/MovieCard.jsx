@@ -17,7 +17,8 @@ function MovieCard({ movies, type }) {
   };
 
   const viewMovie = (movie) => {
-    navigate(`/${movie.imdbID}`);
+    const movieTitle = movie.title || movie.Title || 'unknown';
+    navigate(`/movie/${encodeURIComponent(movieTitle)}`);
   };
   const buyMovie = (movie) => {
     const moviePrice = getMoviePrice(movie);

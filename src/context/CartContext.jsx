@@ -1,26 +1,41 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState } from 'react';
+import { showToast } from '../components/ToastContainer';
 
 // Create Context
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
+  // Initialize cart as empty array (no localStorage)
   const [cart, setCart] = useState([]);
 
   // Normalize movie ID safely
-  const getMovieId = (movie) => String(movie?.imdbID || movie?.id);
+  const getMovieId = (movie) => String(movie?.imdbID || movie?.id || movie?.title || movie?.Title);
 
   const addToCart = (movie) => {
     const movieId = getMovieId(movie);
+    const movieTitle = movie?.title || movie?.Title || 'Movie';
+    
     setCart((prev) => {
       const exists = prev.some((item) => getMovieId(item) === movieId);
-      if (exists) return prev;
+      if (exists) {
+        showToast(`${movieTitle} is already in your cart!`, 'error', 2500);
+        return prev;
+      }
+      
+      showToast(`${movieTitle} added to cart!`, 'cart', 3000);
       return [...prev, movie];
     });
   };
 
   const removeFromCart = (movie) => {
     const movieId = getMovieId(movie);
-    setCart((prev) => prev.filter((item) => getMovieId(item) !== movieId));
+    const movieTitle = movie?.title || movie?.Title || 'Movie';
+    
+    setCart((prev) => {
+      const newCart = prev.filter((item) => getMovieId(item) !== movieId);
+      showToast(`${movieTitle} removed from cart`, 'error', 2500);
+      return newCart;
+    });
   };
 
   const isInCart = (movie) => {
@@ -29,6 +44,9 @@ export const CartProvider = ({ children }) => {
   };
 
   const clearCart = () => {
+    if (cart.length > 0) {
+      showToast('Cart cleared successfully!', 'success', 2500);
+    }
     setCart([]);
   };
 
@@ -36,8 +54,25 @@ export const CartProvider = ({ children }) => {
     return cart.length;
   };
 
+  const getCartTotal = () => {
+    return cart.reduce((total, movie) => {
+      const movieTitle = movie?.title || movie?.Title || 'Movie';
+      const basePrice = movieTitle.length * 23;
+      const finalPrice = Math.max(99, Math.min(999, basePrice));
+      return total + finalPrice;
+    }, 0);
+  };
+
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, isInCart, clearCart, getTotalItems }}>
+    <CartContext.Provider value={{ 
+      cart, 
+      addToCart, 
+      removeFromCart, 
+      isInCart, 
+      clearCart, 
+      getTotalItems,
+      getCartTotal 
+    }}>
       {children}
     </CartContext.Provider>
   );
