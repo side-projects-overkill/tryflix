@@ -56,10 +56,10 @@ export const CartProvider = ({ children }) => {
 
   const getCartTotal = () => {
     return cart.reduce((total, movie) => {
-      const movieTitle = movie?.title || movie?.Title || 'Movie';
-      const basePrice = movieTitle.length * 23;
-      const finalPrice = Math.max(99, Math.min(999, basePrice));
-      return total + finalPrice;
+      const movieId = movie.imdbID || movie.id || '149';
+      // Extract numeric part from ID and use as price
+      const numericPrice = movieId.replace(/\D/g, '').slice(-3) || '149';
+      return parseInt(numericPrice) || 149;
     }, 0);
   };
 

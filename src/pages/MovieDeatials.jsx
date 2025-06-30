@@ -14,11 +14,10 @@ function MovieDetails() {
 
   // Get movie price (reusing logic from MovieCard)
   const getMoviePrice = (movie) => {
-    const movieTitle = movie?.Title || movie?.title || 'Movie';
-    // Create a numeric price based on title length and some characters
-    const basePrice = movieTitle.length * 23;
-    const finalPrice = Math.max(99, Math.min(999, basePrice));
-    return finalPrice;
+    const movieId = movie.imdbID || movie.id || '149';
+    // Extract numeric part from ID and use as price
+    const numericPrice = movieId.replace(/\D/g, '').slice(-3) || '149';
+    return parseInt(numericPrice) || 149;
   };
 
   useEffect(() => {
