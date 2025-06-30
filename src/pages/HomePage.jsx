@@ -1,7 +1,6 @@
 import MovieCard from "../components/MovieCard";
 import { useEffect, useState } from 'react';
 import './HomePage.css'
-import Header from '../components/Header'
 
 // Use a reliable Unsplash cinematic image for the hero banner
 const staticHero = {
@@ -28,23 +27,20 @@ function HomePage() {
   }, []);
 
   return (
-    <>
-     <Header/>
-      <div className="homepage">
-        <section className="hero-banner">
-          <img src={staticHero.url} alt={staticHero.title} className="hero-img" />
-          <div className="hero-overlay" />
-          <div className="hero-content">
-            <h2>{staticHero.title}</h2>
-            <p>{staticHero.description}</p>
-            <button className="hero-btn">Watch Now</button>
-          </div>
-        </section>
-        <section id="movies">
-          <MovieCard movies={movies} type={"Popular"}/>
-        </section>
-      </div>
-    </>
+    <div className="homepage">
+      <section className="hero-banner">
+        <img src={staticHero.url} alt={staticHero.title} className="hero-img" />
+        <div className="hero-overlay" />
+        <div className="hero-content">
+          <h2>{staticHero.title}</h2>
+          <p>{staticHero.description}</p>
+          <button className="hero-btn">Watch Now</button>
+        </div>
+      </section>
+      <section id="movies">
+        <MovieCard movies={movies} type={"Popular"}/>
+      </section>
+    </div>
   );
 }
 

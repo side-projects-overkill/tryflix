@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { CartContext } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
-import Header from '../components/Header';
 import { FaTrash, FaCreditCard, FaShieldAlt, FaFastForward, FaHistory } from 'react-icons/fa';
 import './CartPage.scss';
 
@@ -38,7 +37,6 @@ const CartPage = () => {
   if (cart.length === 0) {
     return (
       <div className="cart-page">
-        <Header />
         <div className="cart-container">
           <div className="empty-cart">
             <div className="empty-cart-icon">🛒</div>
@@ -55,7 +53,6 @@ const CartPage = () => {
 
   return (
     <div className="cart-page">
-      <Header />
       <div className="cart-container">
         <div className="cart-header">
           <h1>Shopping Cart</h1>
